@@ -1,144 +1,68 @@
-# MetaboViz 使用与开发指南 (中国优化版)
-
+好的，没问题！我们来做一个“从零开始”的完整指南，覆盖从 GitHub 下载到本地运行，再到如何使用的全过程。
+---
+# MetaboViz - 从下载到使用全指南
 👋 你好！欢迎使用 **MetaboViz 代谢视界**。
-这是一个基于 React 和 D3.js 的交互式系统生物学平台。为了确保在中国网络环境下流畅使用，我们已经做好了相关配置。
-
+本指南将手把手带你从 GitHub 获取代码，并在你自己的电脑上成功运行它，最后教你如何使用这个强大的交互式工具。
 ---
-
-## 🚀 极速安装指南 (China Friendly)
-
-由于国内网络环境原因，直接安装依赖可能会失败。请务必按照以下步骤操作：
-
-### 1. 安装 Node.js
-如果你的电脑还没有 Node.js，请去官网下载并安装（推荐下载 LTS 版本）：
-[https://nodejs.org/](https://nodejs.org/)
-
-### 2. 初始化项目
-在你的电脑上新建一个文件夹（例如 `metaboviz`），进入该文件夹，打开终端（CMD 或 PowerShell）。
-
-**关键步骤：设置淘宝镜像源 (加速下载)**
-在终端输入以下命令：
-```bash
-npm config set registry https://registry.npmmirror.com
-```
-
-然后执行以下命令创建项目：
-```bash
-# 使用 Vite 快速创建 React + TypeScript 项目
-npm create vite@latest . -- --template react-ts
-
-# 安装 D3.js 依赖
-npm install d3 @types/d3
-```
-
-### 3. 放入代码
-将你收到的代码文件按照以下结构放入文件夹中：
-
-*   **`index.html`** -> 替换根目录下的 `index.html`
-*   **`vite.config.ts`** -> 放入根目录 (用于配置打包路径)
-*   **`src/` 文件夹内** -> 删除原有的文件，放入以下文件：
-    *   `App.tsx`, `index.tsx`, `types.ts`, `constants.ts`
-    *   以及 `components/`, `data/`, `context/`, `services/` 文件夹
-
-### 4. 启动开发服务器
-在终端输入：
-```bash
-npm run dev
-```
-按住 `Ctrl` 点击显示的链接（例如 `http://localhost:5173`），即可看到完美的代谢图谱！
-
+## 🚀 第一部分：在你的电脑上运行 MetaboViz
+### **前置准备**
+在开始之前，请确保你的电脑上已经安装了 [Node.js](https://nodejs.org/)。你可以访问官网下载并安装（推荐下载 LTS 长期支持版）。
+### **步骤 1：获取项目代码**
+你有两种方式从 GitHub 获取代码，选择你最熟悉的一种即可。
+**方式 A：下载压缩包（最简单）**
+1.  访问 MetaboViz 的 GitHub 仓库页面。
+2.  点击绿色的 `< > Code` 按钮。
+3.  在弹出的菜单中选择 `Download ZIP`。
+4.  下载完成后，将压缩包解压到一个你喜欢的位置（例如 `C:\Users\0\metaboviz`）。
+**方式 B：使用 Git 克隆（推荐）**
+1.  打开你的终端（在 Windows 上是 CMD 或 PowerShell）。
+2.  进入你想要存放项目的目录，例如：
+    ```bash
+    cd C:\Users\0\
+    ```
+3.  输入以下命令并回车，代码就会自动下载到 `metaboviz` 文件夹中：
+    ```bash
+    git clone [GitHub仓库的地址]
+    ```
+### **步骤 2：安装项目依赖**
+项目运行需要一些第三方库（比如 D3.js），这一步就是自动把它们下载到你的电脑里。
+1.  在终端里，进入你刚刚下载或解压得到的 `metaboviz` 项目文件夹。
+    ```bash
+    cd metaboviz
+    ```
+2.  输入以下命令，然后按回车，耐心等待它完成：
+    ```bash
+    npm install
+    ```
+    当你看到终端再次显示输入光标时，就表示安装成功了。
+### **步骤 3：启动项目并访问**
+1.  在同一个终端窗口里，输入以下命令并回车：
+    ```bash
+    npm run dev
+    ```
+2.  终端会显示一个本地地址，通常是 `http://localhost:5173/`。
+3.  **按住 `Ctrl` 键，然后用鼠标点击这个地址**，它就会在你的默认浏览器中自动打开。
+现在，你应该能看到 MetaboViz 的交互式图谱了！
 ---
-
-## 📦 如何打包成“离线版”发送给朋友
-
-如果你想把做好的网页发给朋友，让他们**不用安装环境、断网也能直接打开**，请执行“打包”操作：
-
-1. 在终端输入：
-   ```bash
-   npm run build
-   ```
-2. 等待几秒钟，项目文件夹下会多出一个 **`dist`** 文件夹。
-3. 把这个 **`dist`** 文件夹压缩，发给你的朋友。
-4. **注意**：由于浏览器的安全策略，直接双击 `dist/index.html` 可能会有图片或脚本加载限制。推荐你的朋友安装一个极小的工具 `Live Server` 或者使用 `http-server` 来打开它。
-   * *最简单的发给朋友的方法是使用 GitHub Pages (见下文)*
-
----
-
-## 🌍 最推荐：一键发布到 GitHub Pages
-
-这是最稳妥的分享方式，朋友手机电脑都能看，不用传文件。
-
-1. **准备 GitHub 仓库**
-   登录 [GitHub](https://github.com) 创建新仓库。
-
-2. **安装部署工具** (终端运行):
-   ```bash
-   npm install gh-pages --save-dev
-   ```
-
-3. **修改 package.json**
-   打开 `package.json`，添加/修改以下两处：
-   
-   *添加 homepage:*
-   ```json
-   "homepage": "https://你的GitHub用户名.github.io/仓库名",
-   ```
-   
-   *修改 scripts:*
-   ```json
-   "scripts": {
-     "dev": "vite",
-     "build": "tsc && vite build",
-     "predeploy": "npm run build",
-     "deploy": "gh-pages -d dist"
-   },
-   ```
-
-4. **发布**
-   ```bash
-   git init
-   git add .
-   git commit -m "init"
-   git branch -M main
-   git remote add origin https://github.com/你的用户名/仓库名.git
-   git push -u origin main
-   
-   # 最后执行发布命令
-   npm run deploy
-   ```
-   等待片刻，把 `homepage` 里的链接发给朋友即可！
-
----
-
-## ✏️ 如何修改数据
-
-所有代谢通路的数据都存储在 **`src/data/mockData.ts`** 文件中。
-
-### 1. 修改名字或描述
-找到你想要修改的节点（Nodes）或连线（Links）。
-
-### 2. 调整位置 (教科书级布局)
-我们使用 `fx` (横坐标) 和 `fy` (纵坐标) 来精确控制节点位置。
-```typescript
-{ ..., fx: 250, fy: 100, ... } 
-```
-
-### 3. 设置细胞部位
-```typescript
-compartment: 'mitochondria' // 线粒体 (橙色背景)
-compartment: 'cytosol'      // 细胞质 (灰色背景)
-```
-
-### 4. 标记考点 (重点!)
-*   `isRateLimiting: true` -> 会显示红色五角星 ★ (限速酶)。
-*   `examPoint: { en: '...', zh: '...' }` -> 会显示灯泡图标 💡 (考点提示)。
-
----
-
-## 🔧 网络优化说明
-本项目已进行以下优化以适应中国网络环境：
-1. **FontAwesome 图标**：已替换为 `cdn.staticfile.org` (七牛云)，国内秒开。
-2. **NPM 依赖**：推荐使用 `npmmirror` 淘宝镜像源。
-3. **移除 Google Fonts**：使用系统默认字体，防止加载阻塞。
+## 🎯 第二部分：如何使用 MetaboViz
+成功运行后，你可以通过以下方式与图谱进行交互。
+### **基础操作：浏览与导航**
+- **缩放**：使用鼠标滚轮可以放大或缩小图谱，查看细节或全局。
+- **拖拽**：按住鼠标左键并拖动，可以平移整个画布。
+### **核心交互：探索节点**
+- **查看详情**：将鼠标悬停在任何一个代表代谢物的圆点上，会显示它的详细信息。
+- **聚焦关系**：单击一个节点，系统会高亮所有与它直接相关的反应，让你清晰地看到它的“上游”和“下游”。
+### **功能面板：模拟与学习**
+在页面的右侧，你会发现功能强大的控制面板：
+- **🎮 模拟控制**
+  - 调整关键酶的活性，点击“运行模拟”，观察代谢通量的实时变化。
+- **💡 教育模式**
+  - 点击带有 **💡 图标**的节点，会弹出相关的知识点。
+### **细胞分区**
+图谱中不同的背景颜色代表了不同的细胞部位：
+- **橙色背景**：线粒体
+- **灰色背景**：细胞质
+这能帮助你理解代谢反应在细胞内的真实空间位置。
+祝你探索愉快！
 
 祝科研与学习顺利！
