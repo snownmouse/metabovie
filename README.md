@@ -1,7 +1,7 @@
-好的，没问题！我们来做一个“从零开始”的完整指南，覆盖从 GitHub 下载到本地运行，再到如何使用的全过程。
----
 # MetaboViz - 从下载到使用全指南
 👋 你好！欢迎使用 **MetaboViz 代谢视界**。
+<img width="2394" height="1413" alt="image" src="https://github.com/user-attachments/assets/012d64fa-1356-49ba-aaab-1055e7a171b3" />
+
 本指南将手把手带你从 GitHub 获取代码，并在你自己的电脑上成功运行它，最后教你如何使用这个强大的交互式工具。
 ---
 ## 🚀 第一部分：在你的电脑上运行 MetaboViz
