@@ -1,0 +1,5 @@
+{
+  "name": "MetaboViz",
+  "description": "Interactive Metabolic Pathway Visualization & Simulation Platform. Features dual modes for research and education, physiological state simulation, and bilingual support.",
+  "requestFramePermissions": []
+}
